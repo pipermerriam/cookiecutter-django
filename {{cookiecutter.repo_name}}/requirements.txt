@@ -1,5 +1,18 @@
-# This file is here because many Platforms as a Service look for
-#	requirements.txt in the root directory of a project.
-pylibmc==1.4.1
-django-heroku-memcacheify==0.8
--r requirements/production.txt
+# Django
+django>=1.7.1,<1.8.0
+
+# Django 3rd Party
+django-storages==1.1.8
+boto==2.34.0
+
+# Images
+Pillow==2.6.1
+
+# Database
+psycopg2==2.5.4
+
+# Timezone support
+pytz==2014.10
+
+# Configuration
+env-excavator==1.2.0

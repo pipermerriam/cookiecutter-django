@@ -1,12 +1,12 @@
 cookiecutter-django
 =======================
 
-.. image:: https://requires.io/github/pydanny/cookiecutter-django/requirements.png?branch=master
-     :target: https://requires.io/github/pydanny/cookiecutter-django/requirements/?branch=master
+.. image:: https://requires.io/github/pipermerriam/cookiecutter-django/requirements.png?branch=master
+     :target: https://requires.io/github/pipermerriam/cookiecutter-django/requirements/?branch=master
      :alt: Requirements Status
 
-.. image:: https://travis-ci.org/pydanny/cookiecutter-django.svg?branch=master
-     :target: https://travis-ci.org/pydanny/cookiecutter-django?branch=master
+.. image:: https://travis-ci.org/pipermerriam/cookiecutter-django.svg?branch=master
+     :target: https://travis-ci.org/pipermerriam/cookiecutter-django?branch=master
      :alt: Build Status
 
 A cookiecutter_ template for Django.
@@ -18,23 +18,12 @@ Features
 
 * For Django 1.7
 * Twitter Bootstrap_ 3
-* AngularJS_
-* Settings management via django-configurations_
-* Registration via django-allauth_
-* User avatars via django-avatar_
 * Procfile_ for deploying to Heroku
 * Heroku optimized requirements
 * Basic caching setup
-* Grunt build for compass and livereload
-* Basic e-mail configurations for send emails via SendGrid_
 
 .. _Bootstrap: https://github.com/twbs/bootstrap
-.. _AngularJS: https://github.com/angular/angular.js
-.. _django-configurations: https://github.com/jezdez/django-configurations
-.. _django-allauth: https://github.com/pennersr/django-allauth
-.. _django-avatar: https://github.com/jezdez/django-avatar/
 .. _Procfile: https://devcenter.heroku.com/articles/procfile
-.. _SendGrid: https://sendgrid.com/
 
 
 Constraints
@@ -57,12 +46,12 @@ First, get cookiecutter. Trust me, it's awesome::
 
 Now run it against this repo::
 
-    $ cookiecutter https://github.com/pydanny/cookiecutter-django.git
+    $ cookiecutter https://github.com/pipermerriam/cookiecutter-django.git
 
 You'll be prompted for some questions, answer them, then it will create a Django project for you.
 
 
-**Warning**: After this point, change 'Daniel Greenfeld', 'pydanny', etc to your own information.
+**Warning**: After this point, change 'Piper Merriam', 'pipermerriam', etc to your own information.
 
 It prompts you for questions. Answer them::
 
@@ -74,8 +63,8 @@ It prompts you for questions. Answer them::
     Resolving deltas: 100% (283/283), done.
     project_name (default is "project_name")? Reddit Clone
     repo_name (default is "repo_name")? redditclone
-    author_name (default is "Your Name")? Daniel Greenfeld
-    email (default is "Your email")? pydanny@gmail.com
+    author_name (default is "Your Name")? Piper Merriam
+    email (default is "Your email")? pipermerriam.com
     description (default is "A short description of the project.")? A reddit clone.
     year (default is "Current year")? 2014
     domain_name (default is "Domain name")?
@@ -91,7 +80,7 @@ Create a GitHub repo and push it there::
     $ git init
     $ git add .
     $ git commit -m "first awesome commit"
-    $ git remote add origin git@github.com:pydanny/redditclone.git
+    $ git remote add origin git@github.com:pipermerriam/redditclone.git
     $ git push -u origin master
 
 Now take a look at your repo. Don't forget to carefully look at the generated README. Awesome, right?
@@ -123,66 +112,3 @@ You can now run the usual Django ``migrate`` and ``runserver`` command (replace 
     $ python yourapp/manage.py migrate
 
     $ python yourapp/manage.py runserver
-
-The base app will run but you'll need to carry out a few steps to make the sign-up and login forms work. These are currently detailed in `issue #39`_.
-
-.. _issue #39: https://github.com/pydanny/cookiecutter-django/issues/39
-
-**Live reloading and Sass CSS compilation**
-
-If you'd like to take advantage of live reloading and Sass / Compass CSS compilation you can do so with the included Grunt task.
-
-Make sure that nodejs_ is installed. Then in the project root run::
-
-    $ npm install
-
-.. _nodejs: http://nodejs.org/download/
-
-Now you just need::
-
-    $ grunt serve
-
-The base app will now run as it would with the usual ``manage.py runserver`` but with live reloading and Sass compilation enabled.
-
-To get live reloading to work you'll probably need to install an `appropriate browser extension`_
-
-.. _appropriate browser extension: http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions-
-
-It's time to write the code!!!
-
-"Your Stuff"
--------------
-
-Scattered throughout the Python and HTML of this project are places marked with "your stuff". This is where third-party libraries are to be integrated with your project.
-
-Releases
---------
-
-Want a stable release? You can find them at https://github.com/pydanny/cookiecutter-django/releases
-
-
-Not Exactly What You Want?
----------------------------
-
-This is what I want. *It might not be what you want.* Don't worry, you have options:
-
-Fork This
-~~~~~~~~~~
-
-If you have differences in your preferred setup, I encourage you to fork this to create your own version.
-Once you have your fork working, let me know and I'll add it to a '*Similar Cookiecutter Templates*' list here.
-It's up to you whether or not to rename your fork.
-
-If you do rename your fork, I encourage you to submit it to the following places:
-
-* cookiecutter_ so it gets listed in the README as a template.
-* The cookiecutter grid_ on Django Packages.
-
-.. _cookiecutter: https://github.com/audreyr/cookiecutter
-.. _grid: https://www.djangopackages.com/grids/g/cookiecutter/
-
-Or Submit a Pull Request
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-I also accept pull requests on this, if they're small, atomic, and if they make my own project development
-experience better.
