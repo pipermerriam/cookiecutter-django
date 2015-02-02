@@ -1,7 +1,7 @@
 {
     "project_name": "Django Project",
     "repo_name": "dj-project",
-    "app_name": "dj_project"
+    "app_name": "dj_project",
     "github_username": "pipermerriam",
     "author_name": "Piper Merriam",
     "email": "pipermerriam@gmail.com",
