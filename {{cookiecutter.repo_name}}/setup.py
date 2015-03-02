@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from pip.download import PipSession
 from pip.req import parse_requirements
 import os
 import sys
@@ -14,7 +15,11 @@ except ImportError:
 import {{ cookiecutter.repo_name }}
 version = {{ cookiecutter.repo_name }}.__version__
 
-requirements = [str(req.req) for req in parse_requirements('requirements.txt')]
+session = PipSession()
+
+requirements = [
+    str(req.req) for req in parse_requirements('requirements.txt', session=session)
+]
 
 setup(
     name='{{ cookiecutter.project_name }}',
