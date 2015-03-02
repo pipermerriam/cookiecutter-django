@@ -1,5 +1,7 @@
 import os
 import excavator
+import dj_database_url
+import django_cache_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -52,13 +54,15 @@ WSGI_APPLICATION = '{{ cookiecutter.app_name }}.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-import herokuify
-
-DATABASES = herokuify.get_db_config()
+DATABASES = {
+    'default': dj_database_url.parse(excavator.env_string('DATABASE_URL', required=True)),
+}
 DATABASES['default'].setdefault('ATOMIC_REQUESTS', True)
 
 # Cache
-CACHES = herokuify.get_cache_config()
+CACHES = {
+    'default': django_cache_url.config(),
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
@@ -142,7 +146,13 @@ AWS_HEADERS = {
     "Cache-Control": "public, max-age=86400",
 }
 
-if not DEBUG:
+
+if DEBUG:
+    TEMPLATE_LOADERS = (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )
+else:
     # Cached template loading is bad for dev so keep it off when debug is on.
     TEMPLATE_LOADERS = (
         ('django.template.loaders.cached.Loader', (
