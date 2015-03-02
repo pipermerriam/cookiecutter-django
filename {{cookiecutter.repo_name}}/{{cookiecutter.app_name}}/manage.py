@@ -10,7 +10,7 @@ dotenv.load_dotenv(os.path.join(PROJECT_PATH, ".env_defaults"))
 
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{ cookiecutter.repo_name }}.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{ cookiecutter.app_name }}.settings")
 
     from configurations.management import execute_from_command_line
 

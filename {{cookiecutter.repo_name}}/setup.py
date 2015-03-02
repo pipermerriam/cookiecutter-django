@@ -12,8 +12,8 @@ try:
 except ImportError:
     from distutils.core import setup
 
-import {{ cookiecutter.repo_name }}
-version = {{ cookiecutter.repo_name }}.__version__
+import {{ cookiecutter.app_name }}
+version = {{ cookiecutter.app_name }}.__version__
 
 session = PipSession()
 
@@ -32,5 +32,5 @@ setup(
     install_requires=requirements,
     zip_safe=False,
     license="MIT",
-    scripts=['{{ cookiecutter.repo_name }}/manage.py'],
+    scripts=['{{ cookiecutter.app_name }}/manage.py'],
 )

@@ -32,7 +32,7 @@ INSTALLED_APPS = (
     # third party
     'raven.contrib.django.raven_compat',
     # local project
-    '{{ cookiecutter.repo_name }}',
+    '{{ cookiecutter.app_name }}.apps.core',
     # local apps
     # django admin
 )
@@ -46,9 +46,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = '{{ cookiecutter.repo_name }}.urls'
+ROOT_URLCONF = '{{ cookiecutter.app_name }}.urls'
 
-WSGI_APPLICATION = '{{ cookiecutter.repo_name }}.wsgi.application'
+WSGI_APPLICATION = '{{ cookiecutter.app_name }}.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
@@ -97,7 +97,7 @@ STATICFILES_STORAGE = excavator.env_string(
 )
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, '{{ cookiecutter.repo_name }}', 'public'),
+    os.path.join(BASE_DIR, '{{ cookiecutter.app_name }}', 'public'),
 )
 
 # Email Settings
