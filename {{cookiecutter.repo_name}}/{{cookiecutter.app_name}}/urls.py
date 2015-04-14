@@ -11,7 +11,7 @@ urlpatterns = patterns(
     '',
     url(
         r'^$', TemplateView.as_view(template_name='home.html'),
-        name="home",
+        name="site-index",
     ),
 
     # Django admin

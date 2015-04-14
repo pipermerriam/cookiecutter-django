@@ -18,6 +18,25 @@ DEBUG = excavator.env_bool('DJANGO_DEBUG', default=True)
 
 TEMPLATE_DEBUG = DEBUG
 
+# Template Locations
+# https://docs.djangoproject.com/en/1.7/ref/settings/#template-dirs
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, '{{ cookiecutter.app_name }}', 'templates'),
+)
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.request',
+    '{{ cookiecutter.app_name }}.apps.core.context_processors.rollbar',
+)
+
 ALLOWED_HOSTS = excavator.env_list('DJANGO_ALLOWED_HOSTS', required=not DEBUG)
 
 
@@ -32,7 +51,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     # third party
-    'raven.contrib.django.raven_compat',
+    'rest_framework',
+    'django-pipeline',
+    's3_folder_storage',
+    'pipeline',
+    'bootstrap3',
     # local project
     '{{ cookiecutter.app_name }}.apps.core',
     # local apps
@@ -46,7 +69,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
+volunteer)
 
 ROOT_URLCONF = '{{ cookiecutter.app_name }}.urls'
 
@@ -101,7 +124,14 @@ STATICFILES_STORAGE = excavator.env_string(
 )
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, '{{ cookiecutter.app_name }}', 'public'),
+    os.path.join(BASE_DIR, '{{ cookiecutter.app_name }}', 'static'),
+)
+
+# Static file finders.
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
 )
 
 # Email Settings
@@ -160,3 +190,41 @@ else:
             'django.template.loaders.app_directories.Loader',
         )),
     )
+
+# Django Pipeline Settings
+PIPELINE_DISABLE_WRAPPER = excavator.env_bool(
+    'DJANGO_PIPELINE_DISABLE_WRAPPER', default=True,
+)
+PIPELINE_ENABLED = excavator.env_bool('DJANGO_PIPELINE_ENABLED', not DEBUG)
+PIPELINE_CSS = {
+    'base': {
+        'source_filenames': (
+            "css/bootstrap.css",
+            "css/project.css",
+        ),
+        'output_filename': 'css/base.css',
+    },
+}
+
+PIPELINE_JS = {
+    'base': {
+        'source_filenames': (
+            "js/jquery.js",
+            "js/bootstrap.js",
+            "js/project.js",
+        ),
+        'output_filename': 'js/base.js',
+    },
+    'rollbar': {
+        'source_filenames': (
+            "js/rollbar.js",
+        ),
+        'output_filename': 'js/rollbar.js',
+    },
+}
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.NoopCompressor'
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.NoopCompressor'
+
+PIPELINE_TEMPLATE_EXT = '.handlebars'
+PIPELINE_TEMPLATE_FUNC = 'Handlebars.compile'
+PIPELINE_TEMPLATE_NAMESPACE = 'Handlebars.templates'
